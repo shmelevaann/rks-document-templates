@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://documentEdit.caption"
+        focusComponent="documentTable"
+        messagesPack="com.company.rks.web.screens.document">
+    <data>
+        <instance id="documentDc"
+                  class="com.company.rks.entity.Document">
+            <view extends="_local">
+                <property name="documentTemplate" view="_base">
+                    <property name="lines" view="_base"/>
+                </property>
+                <property name="values" view="_base">
+                    <property name="documentTemplateLine" view="_base"/>
+                    <property name="defaultValue"/>
+                    <property name="dateValue"/>
+                    <property name="numberValue"/>
+                </property>
+            </view>
+            <loader/>
+            <collection id="documentValuesDc" property="values"/>
+        </instance>
+        <collection id="documentTemplatesDc" class="com.company.rks.entity.DocumentTemplate">
+            <view extends="_minimal">
+                <property name="lines" view="_base"/>
+            </view>
+            <loader id="documentTemplatesDl">
+                <query>
+                    <![CDATA[select e from rks_DocumentTemplate e]]>
+                </query>
+            </loader>
+        </collection>
+
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="documentDc">
+            <lookupField width="350px" id="documentTemplateField"
+                         optionsContainer="documentTemplatesDc" property="documentTemplate"/>
+        </form>
+        <table id="documentTable" dataContainer="documentValuesDc" width="100%" editable="true" sortable="true">
+            <columns>
+                <column id="documentTemplateLine.number" sort="ASCENDING"/>
+                <column width="350px" id="documentTemplateLine.header" editable="false"/>
+                <column id="value" editable="true" generator="cellTypeGenerator"/>
+            </columns>
+        </table>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

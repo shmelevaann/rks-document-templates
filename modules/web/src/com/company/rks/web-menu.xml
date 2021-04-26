@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-rks" insertBefore="administration" caption="mainMsg://menu_config.application-rks">
+        <item screen="rks_DocumentTemplate.browse" caption="mainMsg://menu_config.rks_DocumentTemplate.browse"/>
+        <item screen="rks_Document.browse" caption="mainMsg://menu_config.rks_Document.browse"/>
+    </menu>
+</menu-config>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://documentTemplateEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.rks.web.screens.documenttemplate">
+    <data>
+        <instance id="documentTemplateDc"
+                  class="com.company.rks.entity.DocumentTemplate">
+            <view extends="_local">
+                <property name="lines" view="_minimal">
+                    <property name="number"/>
+                    <property name="header"/>
+                    <property name="type"/>
+                </property>
+            </view>
+            <loader id="dl"/>
+            <collection id="documentTemplateLinesDc" property="lines"/>
+        </instance>
+    </data>
+    <actions>
+        <action id="windowCommitAndClose"/>
+    </actions>
+    <dialogMode height="600"
+                width="1800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="documentTemplateDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+            </column>
+        </form>
+        <dataGrid id="documentTemplatesTable"
+                  width="100%"
+                  dataContainer="documentTemplateLinesDc"
+                  editorEnabled="true">
+
+            <columns>
+                <column id="number" property="number" editable="true" generatedType="java.lang.Integer"/>
+                <column id="header" property="header" editable="true"/>
+                <column id="type" property="type" editable="true"/>
+            </columns>
+            <actions>
+                <action id="add" type="add"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+            </actions>
+
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="addBtn" action="documentTemplatesTable.add"/>
+                <button id="removeBtn" action="documentTemplatesTable.remove"/>
+                <button id="createBtn" action="documentTemplatesTable.refresh"/>
+            </buttonsPanel>
+        </dataGrid>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

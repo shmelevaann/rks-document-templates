@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://documentTemplateBrowse.caption"
+        focusComponent="documentTemplatesTable"
+        messagesPack="com.company.rks.web.screens.documenttemplate">
+    <data readOnly="true">
+        <collection id="documentTemplatesDc"
+                    class="com.company.rks.entity.DocumentTemplate">
+            <view extends="_local">
+                <property name="lines" view="_minimal"/>
+            </view>
+            <loader id="documentTemplatesDl">
+                <query>
+                    <![CDATA[select e from rks_DocumentTemplate e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="documentTemplatesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="documentTemplatesTable"
+                dataLoader="documentTemplatesDl">
+            <properties include=".*"/>
+        </filter>
+        <dataGrid id="documentTemplatesTable"
+                  width="100%"
+                  dataContainer="documentTemplatesDc"
+                  selectionMode="SINGLE">
+            <actions>
+                <action id="createTemp" type="create"/>
+            </actions>
+            <columns>
+                <column id="name" property="name"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createTempBtn" action="documentTemplatesTable.createTemp" caption="Create template"/>
+            </buttonsPanel>
+        </dataGrid>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
